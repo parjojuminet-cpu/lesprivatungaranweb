@@ -80,9 +80,6 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
 .wa-ico { width: 1.2em; height: 1.2em; flex: none; }
 
-/* ---------- bar promo ---------- */
-.promo { background: var(--yellow); border-bottom: var(--bd); text-align: center; font-weight: 700; font-size: .95rem; padding: 8px var(--gut); }
-.promo[hidden] { display: none; }
 
 /* ---------- header ---------- */
 .site-header { position: sticky; top: 0; z-index: 50; background: var(--paper); border-bottom: var(--bd); }
@@ -420,7 +417,6 @@ h1 { line-height: 1.08; }
 .nav a[aria-current="page"] { border: 0; padding: 8px 10px; background: var(--green-l); }
 .mobile-nav { box-shadow: 0 12px 20px rgba(10,59,44,.08); }
 .mobile-nav a { font-size: 1.05rem; padding: 10px 4px; }
-.promo { border: 0; font-size: .84rem; padding: 7px 14px; }
 .band { background-color: #087B59; }
 .band::before, .band::after { display: none; }
 .note, .level, .mapel-group, .pin, .job, .contact-card, .form-paper, .preview, .piagam { border: 1px solid #DCEBE2; border-radius: 18px; box-shadow: var(--shadow-sm); }
@@ -502,3 +498,152 @@ input:focus, select:focus, textarea:focus { outline: 3px solid rgba(15,95,191,.2
   .btn { font-size: .94rem; }
   .team { grid-template-columns: 1fr 1fr; }
 }
+
+/* =====================================================================
+   MOBILE COMPACT PASS (v3)
+   Skala tipografi, jarak, kartu, dan hero dipadatkan khusus layar ponsel.
+   Desktop/tablet lebar tetap mengikuti desain sebelumnya.
+   ===================================================================== */
+@media (max-width: 600px) {
+  :root { --gut: 15px; }
+  body { font-size: 14px; line-height: 1.55; }
+  .wrap { padding-left: var(--gut); padding-right: var(--gut); }
+
+  h1 { font-size: 1.85rem; line-height: 1.12; }
+  h2 { font-size: 1.48rem; line-height: 1.2; }
+  h3 { font-size: 1.05rem; line-height: 1.25; }
+  p { margin-bottom: .75em; }
+  .lead { font-size: .92rem; line-height: 1.5; }
+  .hand { font-size: 1.35rem; }
+
+  .section { padding: 30px 0; }
+  .section-tight { padding: 22px 0; }
+  .page-head { padding: 25px 0 10px; }
+  .page-head h1 { font-size: 1.8rem; margin-bottom: 8px; }
+  .crumb { font-size: .78rem; }
+
+  .site-header .wrap { height: 58px; gap: 10px; }
+  .brand img { height: 39px; }
+  .menu-btn { width: 40px; height: 40px; border-radius: 10px; padding: 0 9px; gap: 4px; }
+  .menu-btn span { height: 2px; }
+  .mobile-nav { padding: 7px var(--gut) 13px; }
+  .mobile-nav a { font-size: .92rem; padding: 9px 3px; }
+  .mobile-nav .btn { margin-top: 10px; }
+
+  .hero { padding: 24px 0 34px; }
+  .hero-grid { gap: 18px; }
+  .hero h1 { font-size: clamp(1.65rem, 7.2vw, 2.05rem); margin: 4px 0 10px; }
+  .hero .lead { font-size: .91rem; }
+  .hero .btn-row { margin-top: 12px; }
+  .btn-row { gap: 8px; }
+  .btn-row .btn { flex: 1 1 130px; }
+  .btn { min-height: 40px; padding: .68em 1em; font-size: .88rem; border-radius: 10px; }
+  .btn-sm { min-height: 34px; font-size: .82rem; padding: .55em .85em; }
+
+  .stack { min-height: 285px; max-width: 390px; margin: 0 auto; width: 100%; }
+  .stack .polaroid { width: 58%; padding: 7px 7px 0; }
+  .stack .p1 { top: 8px; }
+  .stack .p2 { top: 42px; }
+  .stack .p3 { width: 54%; left: 12%; }
+  .polaroid figcaption { font-size: 1.12rem; padding: 7px 3px 9px; }
+  .stack .stamp { width: 86px; height: 86px; right: 1%; bottom: 4px; border-width: 3px; }
+  .stack .stamp b { font-size: 1.35rem; }
+  .stack .stamp small { font-size: .62rem; }
+  .pr-sheet { margin-top: 14px; padding: 10px 12px 9px 38px; }
+  .pr-sheet::before { left: 27px; }
+  .pr-title { font-size: 1.3rem; line-height: 27px; }
+  .pr-list li { font-size: 1.25rem; line-height: 27px; gap: 8px; }
+  .pr-check { width: 19px; height: 19px; }
+
+  .stamps { padding: 20px 0; gap: 9px; }
+  .stamps .stamp, .stamp { width: 88px; height: 88px; border-width: 3px; }
+  .stamp b { font-size: 1.35rem; }
+  .stamp small { font-size: .65rem; }
+  .stamp-text { font-size: .95rem; max-width: 100%; }
+
+  .notes, .levels, .jobs, .mading, .preview-grid, .team, .legal { gap: 11px; margin-top: 20px; }
+  .note, .level, .mapel-group, .pin, .job, .contact-card, .form-paper, .preview, .piagam { border-radius: 13px; }
+  .note { padding: 13px; }
+  .note .ico { width: 36px; height: 36px; border-radius: 10px; margin-bottom: 8px; }
+  .note .ico svg { width: 20px; height: 20px; }
+  .note h3 { font-size: .98rem; margin-bottom: 5px; }
+  .note p, .level p, .pin p { font-size: .86rem; line-height: 1.5; }
+  .level { padding: 13px; }
+  .level .cover { font-size: 1.12rem; padding: 10px 12px; }
+  .level p { padding: 10px 2px 2px; }
+  .mapel-group { padding: 13px; margin: 12px 0; }
+  .mapel-group h3 { font-size: .98rem; }
+  .chips { gap: 6px; }
+  .chips span { font-size: .78rem; padding: 5px 9px; border-radius: 8px; }
+  .pin { padding: 14px; }
+  .pin h3 { font-size: .98rem; }
+  .pin time { font-size: .76rem; }
+  .tag { font-size: .7rem; padding: 2px 8px; margin-bottom: 7px; }
+  .steps { gap: 15px; margin-top: 26px; }
+  .steps li { padding: 18px 14px 14px; border-radius: 13px; }
+  .steps li::before { width: 34px; height: 34px; top: -15px; left: 14px; font-size: 1.05rem; }
+  .steps h3 { margin-top: 7px; }
+
+  .faq { margin-top: 17px; gap: 15px; }
+  .faq-group > h3 { font-size: .92rem; margin-bottom: 8px; }
+  .faq-list { gap: 7px; }
+  .faq details { border-radius: 10px; }
+  .faq summary { padding: 11px 42px 11px 12px; font-size: .85rem; line-height: 1.4; }
+  .faq summary::after { width: 23px; height: 23px; right: 10px; font-size: 1rem; }
+  .faq details p { padding: 0 12px 12px; font-size: .82rem; line-height: 1.5; }
+  .faq-contact { padding: 14px 12px; border-radius: 12px; }
+  .faq-contact p { font-size: .86rem; }
+
+  .filters { gap: 7px; margin-top: 16px; }
+  .chip { font-size: .78rem; padding: 6px 10px; border-width: 1px; }
+  .gallery { column-gap: 8px; margin-top: 20px; }
+  .gallery .polaroid { padding: 6px 6px 0; margin-bottom: 9px; }
+  .gallery .polaroid figcaption { font-size: .98rem; }
+  .team .polaroid { padding: 7px 7px 0; }
+
+  .tabs { margin-top: 14px; padding: 3px; gap: 3px; border-radius: 11px; }
+  .tab { font-size: .86rem; padding: 8px 7px; }
+  .form-layout { margin-top: 16px; gap: 14px; }
+  .form-paper { padding: 14px 12px; }
+  .form-paper h2 { font-size: 1.2rem; }
+  .field > label, .field > .lbl { font-size: .84rem; margin-bottom: 4px; }
+  input[type=text], input[type=tel], input[type=number], select, textarea { min-height: 42px; font-size: 16px; padding: 9px 11px; }
+  .check-chips { gap: 6px; }
+  .check-chips span { font-size: .76rem; padding: 6px 8px; }
+  .preview { padding: 13px; }
+  .preview h3 { font-size: .95rem; }
+
+  .timeline { margin-top: 19px; padding-left: 22px; gap: 14px; border-left-width: 3px; }
+  .timeline b { font-size: 1.15rem; }
+  .timeline li::before { left: -32px; width: 17px; height: 17px; border-width: 1px; }
+  .piagam { padding: 20px 14px; }
+  .piagam p { font-size: .78rem; }
+  .contact-card { padding: 14px; }
+  .contact-card dl { gap: 9px; }
+  .contact-card dt { font-size: .82rem; }
+  .map, .map iframe { min-height: 210px; }
+
+  .site-footer { padding: 27px 0 18px; margin-top: 20px; }
+  .site-footer h4 { font-size: .96rem; }
+  .site-footer p, .site-footer li { font-size: .82rem; }
+  .foot-grid { gap: 17px; }
+  .foot-logo img { height: 38px; }
+  .legal-line { margin-top: 18px; padding-top: 12px; font-size: .72rem; }
+  .fab { width: 44px; height: 44px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); }
+  .fab svg { width: 22px; height: 22px; }
+}
+
+@media (max-width: 380px) {
+  :root { --gut: 13px; }
+  .hero h1 { font-size: 1.62rem; }
+  .hero { padding-top: 20px; }
+  .stack { min-height: 250px; }
+  .btn-row .btn { flex-basis: 100%; }
+  .notes, .levels { grid-template-columns: 1fr; }
+  .stamps .stamp { width: 78px; height: 78px; }
+}
+
+/* filter lowongan per kecamatan */
+.job-filter { max-width: 420px; }
+.job-filter label { display: block; font-weight: 700; margin-bottom: 6px; }
+.job-filter p { margin: 8px 0 0; font-size: .95rem; color: var(--ink-soft); }

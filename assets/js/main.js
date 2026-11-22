@@ -39,8 +39,7 @@
     }).join('');
   }
   var top = document.createElement('div');
-  var promo = (S.promo && S.promo.tampilkan && S.promo.teks) ? '<div class="promo">' + esc(S.promo.teks) + '</div>' : '';
-  top.innerHTML = promo +
+  top.innerHTML =
     '<a class="skip" href="#isi">Langsung ke isi halaman</a>' +
     '<header class="site-header"><div class="wrap">' +
     '<a class="brand" href="index.html" aria-label="' + esc(S.nama) + ', beranda"><img src="assets/img/logo.png" alt="' + esc(S.nama) + '" width="100" height="46"></a>' +
@@ -94,6 +93,9 @@
   });
   $$('[data-render="area"]').forEach(function (e) { e.innerHTML = (S.area || []).map(function (a) { return '<span>' + esc(a) + '</span>'; }).join(''); });
   $$('[data-render="faq"]').forEach(function (e) {
+    function daftar(a) { a = (a || []).slice(); return a.length > 1 ? a.slice(0, -1).join(', ') + ' dan ' + a[a.length - 1] : a.join(''); }
+    var allMapel = []; Object.keys(S.mapel || {}).forEach(function (g) { S.mapel[g].forEach(function (x) { if (allMapel.indexOf(x) < 0) allMapel.push(x); }); });
+    var isi = function (t) { return String(t).replace('{area}', daftar(S.area)).replace('{mapel}', daftar(allMapel)); };
     var items = S.faq || [], groups = [];
     items.forEach(function (f) {
       var name = f.kategori || 'Pertanyaan umum';
@@ -103,7 +105,7 @@
     });
     e.innerHTML = groups.map(function (g, gi) {
       return '<section class="faq-group"><h3>' + esc(g.nama) + '</h3><div class="faq-list">' + g.items.map(function (f, i) {
-        return '<details' + (gi === 0 && i === 0 ? ' open' : '') + '><summary>' + esc(f.t) + '</summary><div class="faq-answer"><p>' + esc(f.j) + '</p></div></details>';
+        return '<details' + (gi === 0 && i === 0 ? ' open' : '') + '><summary>' + esc(f.t) + '</summary><div class="faq-answer"><p>' + esc(isi(f.j)) + '</p></div></details>';
       }).join('') + '</div></section>';
     }).join('') + '<div class="faq-contact"><p>Masih ada pertanyaan atau ingin memastikan biaya dan jadwal?</p><a class="btn btn-green" data-wa="Halo, saya ingin konsultasi tentang les privat." href="#">Tanya admin melalui WhatsApp</a></div>';
     var contact = $('.faq-contact [data-wa]', e);
@@ -181,16 +183,31 @@
     draw('Semua');
   });
 
-  /* ---------- lowongan ---------- */
+  /* ---------- lowongan (dengan filter kecamatan) ---------- */
   $$('[data-render="lowongan"]').forEach(function (e) {
-    e.innerHTML = (S.lowongan || []).map(function (l) {
+    var all = S.lowongan || [];
+    var sel = $('#filter-kec'), info = $('#info-lowongan');
+    function card(l) {
       var buka = l.status !== 'Ditutup';
       return '<article class="job' + (buka ? '' : ' tutup') + '"><div class="job-head"><span>Dicari!</span><small>' + esc(l.status) + '</small></div><div class="job-body">' +
-        '<h3>' + esc(l.judul) + '</h3><p class="meta">Mapel: ' + esc(l.mapel) + '<br>Area: ' + esc(l.area) + '</p><ul>' +
+        '<h3>' + esc(l.judul) + '</h3><p class="meta">Mapel: ' + esc(l.mapel) + '<br>Kecamatan: ' + esc(l.area) + '</p><ul>' +
         (l.syarat || []).map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ul>' +
-        (buka ? '<a class="btn btn-sm" href="daftar.html?tab=tentor&posisi=' + encodeURIComponent(l.judul.replace(/^CONTOH:\s*/, '')) + '#tentor">Lamar posisi ini</a>' : '') +
+        (buka ? '<a class="btn btn-sm" href="daftar.html?tab=tentor&posisi=' + encodeURIComponent((l.judul + ', ' + l.area).replace(/^CONTOH:\s*/, '')) + '#tentor">Lamar posisi ini</a>' : '') +
         '</div></article>';
-    }).join('');
+    }
+    function draw() {
+      var k = sel ? sel.value : '';
+      var list = all.filter(function (l) { return !k || l.area === k; });
+      e.innerHTML = list.map(card).join('') || '<p>Belum ada lowongan di kecamatan ini. Kirim lamaran umum, kami hubungi saat ada kebutuhan.</p>';
+      if (info) info.textContent = list.filter(function (l) { return l.status !== 'Ditutup'; }).length + ' lowongan dibuka' + (k ? ' di ' + k : ' di ' + new Set(all.map(function (l) { return l.area; })).size + ' kecamatan');
+    }
+    if (sel) {
+      var kec = []; all.forEach(function (l) { if (kec.indexOf(l.area) < 0) kec.push(l.area); });
+      kec.sort();
+      sel.innerHTML = '<option value="">Semua kecamatan</option>' + kec.map(function (k) { return '<option>' + esc(k) + '</option>'; }).join('');
+      sel.addEventListener('change', draw);
+    }
+    draw();
   });
 
   /* ---------- galeri + lightbox ---------- */

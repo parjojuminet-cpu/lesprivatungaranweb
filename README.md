@@ -13,7 +13,6 @@ Tanda **CONTOH** = data dummy, ganti dengan datamu.
 | Nomor WhatsApp (WAJIB) | `wa` (awali 62, tanpa + dan spasi) dan `nomorTampil` |
 | Alamat, jam, peta, sosmed | `alamat`, `jamLayanan`, `petaUrl`, `sosmed` |
 | Angka 150 murid, 50 tentor, 2019 | `murid`, `tentor`, `sejak` |
-| Bar promo kuning di atas | `promo` |
 | Legalitas | `legalitas` |
 | Pengumuman baru | `pengumuman`: salin satu blok `{ ... }`, ganti isinya |
 | Lowongan tentor | `lowongan`: ubah `status` jadi `'Ditutup'` bila sudah penuh |
@@ -43,7 +42,7 @@ Catatan: `sitemap.xml` dan `robots.txt` memakai alamat `https://lesprivatungaran
 
 ## Penyempurnaan UI & FAQ
 - FAQ kini dikelompokkan menjadi 5 kategori dengan 25 pertanyaan.
-- Jawaban terkait kebijakan yang belum terkonfirmasi (biaya pendaftaran, pembayaran, durasi sesi, dan promo percobaan) diarahkan untuk dikonfirmasi melalui WhatsApp.
+- Informasi biaya pendaftaran, pembayaran, dan durasi sesi yang belum terkonfirmasi diarahkan untuk dikonfirmasi melalui WhatsApp. Website tidak menampilkan promo yang sedang tidak berlaku.
 - Tampilan dirapikan untuk layar ponsel: navigasi, kartu, formulir, galeri, FAQ, tombol WhatsApp, dan jarak antarbagian.
 - Identitas warna hijau-kuning dan struktur HTML/CSS/JavaScript asli tetap dipertahankan.
 - Semua data bisnis yang bertanda CONTOH tetap perlu diganti dengan informasi resmi sebelum situs dipublikasikan.
